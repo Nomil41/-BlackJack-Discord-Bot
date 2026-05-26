@@ -22,11 +22,11 @@ const client = new Client({
 });
 
 // ═══════════════════════════════════════════════════════════════════
-//  SQLite KURULUM
+//  SQLite Installation
 // ═══════════════════════════════════════════════════════════════════
 const db = new Database(path.join(__dirname, 'blackjack.db'));
 
-// WAL modu: daha hızlı yazma, daha az disk baskısı
+// WAL Mode: Faster Writes, Reduced Disk I/O
 db.pragma('journal_mode = WAL');
 db.pragma('synchronous = NORMAL');
 
@@ -61,7 +61,7 @@ db.exec(`
   );
 `);
 
-// Hazırlanmış sorgular (performans için)
+// Prepared Statements (for Better Performance)
 const stmts = {
   getBalance:    db.prepare('SELECT amount FROM balances WHERE userId = ?'),
   setBalance:    db.prepare('INSERT INTO balances (userId, amount) VALUES (?, ?) ON CONFLICT(userId) DO UPDATE SET amount = excluded.amount'),
@@ -81,7 +81,7 @@ const stmts = {
 };
 
 // ═══════════════════════════════════════════════════════════════════
-//  VERİ FONKSİYONLARI
+//  Data Functions
 // ═══════════════════════════════════════════════════════════════════
 
 // BALANCE
@@ -160,7 +160,7 @@ function getLang(userId, guildId) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  DİL SİSTEMİ
+//  Language System
 // ═══════════════════════════════════════════════════════════════════
 const STRINGS = {
   en: {
@@ -415,7 +415,7 @@ async function registerCommands() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  KART SİSTEMİ
+//  Card System
 // ═══════════════════════════════════════════════════════════════════
 const SUITS = [
   {symbol:'♣',color:'#1a1a1a'},
@@ -453,7 +453,7 @@ function canSplit(hand) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  CANVAS — KARTLAR
+//  CANVAS — CARDS
 // ═══════════════════════════════════════════════════════════════════
 const CW=230, CH=330, CRADIUS=18;
 
@@ -854,7 +854,7 @@ function drawCard(ctx,card,x,y,faceDown=false) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  CHİP SİSTEMİ
+//  CHIP SYSTEM
 // ═══════════════════════════════════════════════════════════════════
 const CHIP_CONFIG = {
   1:   {color:'#F4A7B9',edge:'#e8889a'},
@@ -1206,7 +1206,7 @@ async function renderBalanceCard(userId,username,lang='en') {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  OYUN LOJİĞİ
+//  GAME LOGIC
 // ═══════════════════════════════════════════════════════════════════
 const activeGames = new Map();
 
@@ -1916,7 +1916,7 @@ async function playMultiTurns(lobby, channelId, lang, interaction) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  KOMUT HANDLER
+// COMMAND HANDLER
 // ═══════════════════════════════════════════════════════════════════
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
@@ -2082,7 +2082,7 @@ client.on('messageCreate', async message => {
 });
 
 // ═══════════════════════════════════════════════════════════════════
-//  GLOBAL HATA YAKALAMA — Bot artık crash olmaz
+//  GLOBAL ERROR HANDLING
 // ═══════════════════════════════════════════════════════════════════
 process.on('uncaughtException', (err) => {
   console.error('[UNCAUGHT EXCEPTION]', err);
