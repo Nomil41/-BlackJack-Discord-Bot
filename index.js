@@ -7,8 +7,8 @@ const { createCanvas } = require('@napi-rs/canvas');
 const Database = require('better-sqlite3');
 const path = require('path');
 
-const TOKEN     = '';
-const CLIENT_ID = '';
+const TOKEN     = 'YOUR_BOT_TOKEN_HERE';
+const CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
 
 const DAILY_AMOUNT   = 100;
 const DAILY_COOLDOWN = 24 * 60 * 60 * 1000;
