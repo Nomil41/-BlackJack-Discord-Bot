@@ -1,0 +1,17 @@
+{
+  "name": "blackjack-discord-bot",
+  "version": "2.0.0",
+  "description": "Discord BlackJack Botu — Gerçek kurallar, resimli, bahis sistemi",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.44",
+    "better-sqlite3": "^12.10.0",
+    "discord.js": "^14.26.4",
+    "sql.js": "^1.14.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
+  }
+}
